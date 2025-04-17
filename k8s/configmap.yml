@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  GITLAB_OMNIBUS_CONFIG: |
+    letsencrypt['enable'] = false
+    external_url 'http://gitlab.gitlab.svc.cluster.local'
+kind: ConfigMap
+metadata:
+  name: gitlab
+  namespace: gitlab

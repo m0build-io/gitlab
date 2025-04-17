@@ -1,0 +1,49 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: data
+  namespace: gitlab
+spec:
+  storageClassName: openebs-dual-replica
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 80Gi
+  selector:
+    matchLabels:
+      type: data
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: logs
+  namespace: gitlab
+spec:
+  storageClassName: openebs-dual-replica
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      type: logs
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: config
+  namespace: gitlab
+spec:
+  storageClassName: openebs-dual-replica
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi
+  selector:
+    matchLabels:
+      type: config

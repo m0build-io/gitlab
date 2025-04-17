@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: gitlab
+  name: gitlab
+  annotations:
+    # Enable cert-manager to create automatically the SSL certificate and store in Secret
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    cert-manager.io/cluster-issuer: intranet-acme-clusterissuer
+    cert-manager.io/issue-temporary-certificate: "true"
+    # acme.cert-manager.io/http01-edit-in-place: "true"
+spec:
+  ingressClassName: ingress-class-intranet
+  tls:
+  - hosts:
+    - gitlab.intranet.mobuild.io
+    secretName: gitlab-intranet-tls
+  rules:
+  - host: gitlab.intranet.mobuild.io
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: gitlab
+            port:
+              number: 80
+
+
