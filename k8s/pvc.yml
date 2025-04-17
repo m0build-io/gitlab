@@ -10,9 +10,6 @@ spec:
   resources:
     requests:
       storage: 80Gi
-  selector:
-    matchLabels:
-      type: data
 
 ---
 kind: PersistentVolumeClaim
@@ -27,9 +24,6 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  selector:
-    matchLabels:
-      type: logs
 
 ---
 kind: PersistentVolumeClaim
@@ -44,6 +38,3 @@ spec:
   resources:
     requests:
       storage: 200Mi
-  selector:
-    matchLabels:
-      type: config
